@@ -14,6 +14,11 @@
         1.实现页面上对数据的增删查改
         2.当浏览器渲染页面时数鼠标焦点默认在输入框上
         3.全局过滤器和私有过滤器
+
+        过滤器调用的格式：{{name | nameope}}  
+        过滤器定义方式：vue.filter('过滤器名称',function(){})
+        
+
     -->
 
 
@@ -64,7 +69,7 @@
                 <tr v-for="item in search(keywords)" :key="item.id">
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.createtime}}</td>   
+                    <td>{{item.createtime | createtimeFilter('yyyy-MM-dd HH:mm:ss')}}</td>   
                     <td><a href=""  @click.prevent="del(item.id)">删除</a></td>  
                 </tr>
     
@@ -79,6 +84,25 @@
 
     </div>
     <script>
+
+      //全局过滤器：
+      Vue.filter('createtimeFilter',function(createtime,args){
+          debugger
+          var dt = new Date(createtime);
+          var y = dt.getFullYear();
+          var m = dt.getMonth()+1;
+          var d = dt.getDate();
+          var hh = dt.getHours();
+          var mm = dt.getMinutes();
+          var ss = dt.getSeconds();
+
+          return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+          
+
+
+
+      })
+
     
     var vm = new Vue({
         el:"#app",
