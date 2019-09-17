@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+[v-cloak]{
+    display:none
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        <!--使用v-cloak 能够解决插值表达式闪烁的问题-->
+        <p v-cloak> {{msg}}</p>
+
+        <!--v-bind vue 提供绑定属性的指令-->
+        <!-- <input type="button" value="按钮" v-bind:title="titles"></p> -->
+        <!--简写版本 v-bind:title  等同 :title -->
+        <!-- <input type="button" value="按钮" :title="titles+'1234ty'"  v-on:click="show"></p> -->
+
+        <!-- v-on指令 事件绑定   简写版本 v-on:click="show"  等同 @click="show" -->
+        <input type="button" value="按钮" :title="titles+'1234ty'" @click="show">
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",//指定控制区域
+            data:{//数据
+                msg:'123',
+                titles:'自定义按钮title'
+
+            },
+            methods:{//制定实例中所有可用的方法
+                show:function(){
+                    alert('Hello World!');
+                }
+
+
+
+
+
+            }
+
+        });
+         
+    </script>
+</body>
+</html>

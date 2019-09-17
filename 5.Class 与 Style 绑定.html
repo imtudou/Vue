@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+    .red {color: red;}
+    .blue{color:burlywood}
+    .font {font-size: 50px}   
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <!--1.使用class样式-->
+        <!--属性绑定-->
+        <h1  v-bind:class="{red:true}" >这是一个H1 标签</h1>
+
+        <!--数组-->
+        <h1  :class="['red','font']" >这是一个H1 标签</h1>
+
+        <!--数组中使用三元表达式-->
+        <h1   :class="['red',isActive?'red':'blue']" >这是一个H1 标签</h1>
+
+        <!--数组中嵌套对象-->
+        <h1 :class="['font',{'blue':isActive}]">这是一个H1 标签</h1>
+
+        <!--直接使用对象-->
+        <h1   :class="{red:isActive}" >这是一个H1 标签</h1>
+
+
+
+---------------------------------------------------------------------
+        <!--2.使用内联样式-->
+        <h1 :style="{'color':'burlywood','font-size':'45px'}" >这是一个H1 标签 使用内联样式</h1>
+        <h1 :style="h1StyleObj">这是一个H1 标签 使用内联样式</h1>
+
+        <h1 :style="[h1StyleObj, h1StyleObj2]">这是一个H1 标签 使用内联样式</h1>
+
+
+
+
+
+    
+
+    </div>
+    
+
+
+    <script>
+    
+    var vm = new Vue({
+
+        el:"#app",
+        data: {
+            h1StyleObj: { color: 'red', 'font-size': '40px', 'font-weight': '200' },
+            h1StyleObj2: { fontStyle: 'italic' }
+        }
+
+
+
+
+
+
+    });
+    
+    
+    </script>
+    
+</body>
+</html>
