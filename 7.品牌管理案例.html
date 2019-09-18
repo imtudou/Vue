@@ -14,6 +14,7 @@
         1.实现页面上对数据的增删查改
         2.当浏览器渲染页面时数鼠标焦点默认在输入框上
         3.全局过滤器和私有过滤器
+        4.全局,私有自定义指令（focus）
 
         过滤器调用的格式：{{name | nameope}}  
         过滤器定义方式：vue.filter('过滤器名称',function(){})
@@ -38,15 +39,16 @@
               
                       <label>
                         Name:
-                        <input type="text" class="form-control" v-model="name">
+                        <input type="text" class="form-control" v-model="name" @keyup.f2="add">
                       </label>
+                      
               
                       <!-- 在Vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
-                      <input type="button" value="添加" class="btn btn-primary" @click="add()">
+                      <input type="button" value="添加" class="btn btn-primary" @click="add">
                       
                       <label>
                         搜索名称关键字：
-                        <input type="text" class="form-control" v-model="keywords">
+                        <input type="text" class="form-control" v-model="keywords" v-focus v-color="'blue'" >
                       </label>
                     </div>
             </div>
@@ -75,6 +77,7 @@
     
             </tbody>
             </table>
+            <p v-fontweight="'bold'" v-fontsize="'25px'">私有过滤器时间：{{createtime | privateTimeFilter}}</p>
 
 
 
@@ -84,24 +87,52 @@
 
     </div>
     <script>
+        /*
+        公共函数
+        */
+        function DateTimeNow(datetime){
+            if(datetime == '' || datetime == undefined || datetime == null)
+              datetime = new Date();
+
+            var dt = new Date(datetime);
+            var y = dt.getFullYear();
+            var m = (dt.getMonth()+1).toString().padStart(2,'0');
+            var d = dt.getDate();
+            var hh = dt.getHours();
+            var mm = dt.getMinutes();
+            var ss = dt.getSeconds().toString().padStart(2,'0');
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+        };
+
+        //自定义全局案件修饰符
+        Vue.config.keyCodes.f2 = 113;   
 
       //全局过滤器：
       Vue.filter('createtimeFilter',function(createtime,args){
-          debugger
-          var dt = new Date(createtime);
-          var y = dt.getFullYear();
-          var m = dt.getMonth()+1;
-          var d = dt.getDate();
-          var hh = dt.getHours();
-          var mm = dt.getMinutes();
-          var ss = dt.getSeconds();
+          return DateTimeNow(createtime);
+      });
 
-          return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+      //自定义指令：
+      //申明方式：v-directive()
+      //调用方式：v-focus
+
+      //自定义文本框获取焦点指令
+      Vue.directive('focus',{
+          inserted:function(el){//和js行为相关的操作用inserted 存储在内存中 在bind后执行
+               el.focus();
+          }
+      });
+
+      //自定义设置搜索框文字颜色样式指令
+      Vue.directive('color',{
+          bind:function(el,binding){//在inserted前渲染（存储在dom中）
+            //   el.style.color='red';
+             el.style.color=binding.value;
+
+
+          }
           
-
-
-
-      })
+      });
 
     
     var vm = new Vue({
@@ -112,20 +143,28 @@
             keywords:'',
             createtime:new Date(),
             list:[
-                {id:1,name:"奔驰",createtime:new Date()},
-                {id:2,name:"宝马",createtime:new Date()},
-                {id:3,name:"长安",createtime:new Date()}
+                {id:1,name:"奔驰",createtime:this.createtime},
+                {id:2,name:"宝马",createtime:this.createtime},
+                {id:3,name:"长安",createtime:this.createtime},
+                {id:4,name:"思域",createtime:this.createtime},
+                {id:5,name:"菲斯塔",createtime:this.createtime},
+                {id:6,name:"长安奔奔",createtime:this.createtime}
             ]
         },
         methods:{
 
             //添加
             add:function(params){
-                 
+
+                 if(this.id.toString().trim() == '')  return alert("id不能为空!") ;
+                 if(this.name == '') return alert("name不能为空!"); 
+
                 var datas = {id:this.id,name:this.name,createtime:this.createtime};
                 this.list.push(datas);
                 this.id=this.name='';
             },
+
+
             //删除
             del:function(id){
                var models =  this.list.filter(s=>s.id);
@@ -140,8 +179,6 @@
             //搜索
             search:function(keywords){
                 var newArray = [];
-
-
                 //1.判断一个字符串中是否包含另一个字符串  Arry.indexOf()  返回 1:存在   -1:不存在
                 this.list.forEach(item => {
                     if(item.name.indexOf(keywords)!=-1){
@@ -150,19 +187,29 @@
                     
                 });
                 return newArray;
-
-
-
-
             }
-
-
+        },
+        //私有过滤器
+        filters:{
+            privateTimeFilter:function(createtimeStr,args){
+                let datetime = DateTimeNow(createtimeStr);
+                return datetime+'~~~~~~~~~~~~~~~'
+            }
+        },
+        //私有指令
+        directives:{
+            'fontweight':{
+                bind:function(el,binding){debugger
+                    el.style.fontWeight =  binding.value;
+                }
+            },
+            'fontsize':function(el,binding){
+                    el.style.fontSize =parseInt(binding.value)+'px';
+            }
             
 
-
-
-
         }
+
 
 
 

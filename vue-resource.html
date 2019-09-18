@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-resource-1.3.4.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="GET请求" @click="GetInfo">
+        <input type="button" value="POST请求" @click="PostInfo">
+        <input type="button" value="Josnp请求" @click="JosnpInfo">
+    </div>
+
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+                GetInfo(){
+                    this.$http.get('http://hq.sinajs.cn/list=gb_bkd').then(res=>{
+                        console.info("GET请求:"+res.body);
+                    })
+                },
+                PostInfo(){
+                    // post 方法接收三个参数：
+                    // 参数1： 要请求的URL地址
+                    // 参数2： 要发送的数据对象
+                    // 参数3： 指定post提交的编码类型为 application/x-www-form-urlencoded
+                    this.$http.post('http://vue.studyit.io/api/post',{},{ emulateJSON: true }).then(res=>{
+                        console.info("post请求:"+res.body);
+                    })
+                },
+                JosnpInfo(){ // JSONP形式从服务器获取数据
+                    this.$http.jsonp('https://www.baidu.com/').then(res=>{
+                        console.info("JSONP请求:"+res.body);
+                    })
+                }
+            }
+
+
+        })
+    
+
+    </script>
+    
+</body>
+</html>
