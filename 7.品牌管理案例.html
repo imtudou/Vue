@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <script src="./lib/vue.js"></script>
     <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
 </head>
+
 <body>
 
     <!--
@@ -23,61 +25,61 @@
     -->
 
 
-    
+
 
     <div id="app">
 
-            <div class="panel panel-primary">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">添加品牌</h3>
-                    </div>
-                    <div class="panel-body form-inline">
-                      <label>
-                        Id:
-                        <input type="text" class="form-control" v-model="id">
-                      </label>
-              
-                      <label>
-                        Name:
-                        <input type="text" class="form-control" v-model="name" @keyup.f2="add">
-                      </label>
-                      
-              
-                      <!-- 在Vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
-                      <input type="button" value="添加" class="btn btn-primary" @click="add">
-                      
-                      <label>
-                        搜索名称关键字：
-                        <input type="text" class="form-control" v-model="keywords" v-focus v-color="'blue'" >
-                      </label>
-                    </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
             </div>
-              
+            <div class="panel-body form-inline">
+                <label>
+                    Id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
 
-            <table class="table table-bordered table-hover table-striped">
+                <label>
+                    Name:
+                    <input type="text" class="form-control" v-model="name" @keyup.f2="add">
+                </label>
+
+
+                <!-- 在Vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
+                <input type="button" value="添加" class="btn btn-primary" @click="add">
+
+                <label>
+                    搜索名称关键字：
+                    <input type="text" class="form-control" v-model="keywords" v-focus v-color="'blue'">
+                </label>
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Ctime</th>
-                <th>Operation</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- 之前， v-for 中的数据，都是直接从 data 上的list中直接渲染过来的 -->
                 <!-- 现在， 我们自定义了一个 search 方法，同时，把 所有的关键字，通过传参的形式，传递给了 search 方法 -->
                 <!-- 在 search 方法内部，通过 执行 for 循环， 把所有符合 搜索关键字的数据，保存到 一个新数组中，返回 -->
-    
+
                 <tr v-for="item in search(keywords)" :key="item.id">
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.createtime | createtimeFilter('yyyy-MM-dd HH:mm:ss')}}</td>   
-                    <td><a href=""  @click.prevent="del(item.id)">删除</a></td>  
+                    <td>{{item.createtime | createtimeFilter('yyyy-MM-dd HH:mm:ss')}}</td>
+                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
                 </tr>
-    
+
             </tbody>
-            </table>
-            <p v-fontweight="'bold'" v-fontsize="'25px'">私有过滤器时间：{{createtime | privateTimeFilter}}</p>
+        </table>
+        <p v-fontweight="'bold'" v-fontsize="'25px'">私有过滤器时间：{{createtime | privateTimeFilter}}</p>
 
 
 
@@ -90,145 +92,139 @@
         /*
         公共函数
         */
-        function DateTimeNow(datetime){
-            if(datetime == '' || datetime == undefined || datetime == null)
-              datetime = new Date();
+        function DateTimeNow(datetime) {
+            if (datetime == '' || datetime == undefined || datetime == null)
+                datetime = new Date();
 
             var dt = new Date(datetime);
             var y = dt.getFullYear();
-            var m = (dt.getMonth()+1).toString().padStart(2,'0');
+            var m = (dt.getMonth() + 1).toString().padStart(2, '0');
             var d = dt.getDate();
             var hh = dt.getHours();
             var mm = dt.getMinutes();
-            var ss = dt.getSeconds().toString().padStart(2,'0');
+            var ss = dt.getSeconds().toString().padStart(2, '0');
             return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
         };
 
         //自定义全局案件修饰符
-        Vue.config.keyCodes.f2 = 113;   
+        Vue.config.keyCodes.f2 = 113;
 
-      //全局过滤器：
-      Vue.filter('createtimeFilter',function(createtime,args){
-          return DateTimeNow(createtime);
-      });
+        //全局过滤器：
+        Vue.filter('createtimeFilter', function (createtime, args) {
+            return DateTimeNow(createtime);
+        });
 
-      //自定义指令：
-      //申明方式：v-directive()
-      //调用方式：v-focus
+        //自定义指令：
+        //申明方式：v-directive()
+        //调用方式：v-focus
 
-      //自定义文本框获取焦点指令
-      Vue.directive('focus',{
-          inserted:function(el){//和js行为相关的操作用inserted 存储在内存中 在bind后执行
-               el.focus();
-          }
-      });
-
-      //自定义设置搜索框文字颜色样式指令
-      Vue.directive('color',{
-          bind:function(el,binding){//在inserted前渲染（存储在dom中）
-            //   el.style.color='red';
-             el.style.color=binding.value;
-
-
-          }
-          
-      });
-
-    
-    var vm = new Vue({
-        el:"#app",
-        data:{
-            id:'',
-            name:'',
-            keywords:'',
-            createtime:new Date(),
-            list:[
-                {id:1,name:"奔驰",createtime:this.createtime},
-                {id:2,name:"宝马",createtime:this.createtime},
-                {id:3,name:"长安",createtime:this.createtime},
-                {id:4,name:"思域",createtime:this.createtime},
-                {id:5,name:"菲斯塔",createtime:this.createtime},
-                {id:6,name:"长安奔奔",createtime:this.createtime}
-            ]
-        },
-        methods:{
-
-            //添加
-            add:function(params){
-
-                 if(this.id.toString().trim() == '')  return alert("id不能为空!") ;
-                 if(this.name == '') return alert("name不能为空!"); 
-
-                var datas = {id:this.id,name:this.name,createtime:this.createtime};
-                this.list.push(datas);
-                this.id=this.name='';
-            },
-
-
-            //删除
-            del:function(id){
-               var models =  this.list.filter(s=>s.id);
-               this.list.some((item,i)=>{
-                   if(item.id == id)
-                   {
-                       this.list.splice(i,1);//(i,1)  i:要删除的数组中的索引  1:删除元素的个数
-                   }
-               });
-            },
-
-            //搜索
-            search:function(keywords){
-                var newArray = [];
-                //1.判断一个字符串中是否包含另一个字符串  Arry.indexOf()  返回 1:存在   -1:不存在
-                this.list.forEach(item => {
-                    if(item.name.indexOf(keywords)!=-1){
-                        newArray.push(item);
-                    }
-                    
-                });
-                return newArray;
+        //自定义文本框获取焦点指令
+        Vue.directive('focus', {
+            inserted: function (el) {//和js行为相关的操作用inserted 存储在内存中 在bind后执行
+                el.focus();
             }
-        },
-        //私有过滤器
-        filters:{
-            privateTimeFilter:function(createtimeStr,args){
-                let datetime = DateTimeNow(createtimeStr);
-                return datetime+'~~~~~~~~~~~~~~~'
+        });
+
+        //自定义设置搜索框文字颜色样式指令
+        Vue.directive('color', {
+            bind: function (el, binding) {//在inserted前渲染（存储在dom中）
+                //   el.style.color='red';
+                el.style.color = binding.value;
+
+
             }
-        },
-        //私有指令
-        directives:{
-            'fontweight':{
-                bind:function(el,binding){debugger
-                    el.style.fontWeight =  binding.value;
+
+        });
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                id: '',
+                name: '',
+                keywords: '',
+                createtime: new Date(),
+                list: [
+                    { id: 1, name: "奔驰", createtime: this.createtime },
+                    { id: 2, name: "宝马", createtime: this.createtime },
+                    { id: 3, name: "长安", createtime: this.createtime },
+                    { id: 4, name: "思域", createtime: this.createtime },
+                    { id: 5, name: "菲斯塔", createtime: this.createtime },
+                    { id: 6, name: "长安奔奔", createtime: this.createtime }
+                ]
+            },
+            methods: {
+
+                //添加
+                add: function (params) {
+
+                    if (this.id.toString().trim() == '') return alert("id不能为空!");
+                    if (this.name == '') return alert("name不能为空!");
+
+                    var datas = { id: this.id, name: this.name, createtime: this.createtime };
+                    this.list.push(datas);
+                    this.id = this.name = '';
+                },
+
+
+                //删除
+                del: function (id) {
+                    var models = this.list.filter(s => s.id);
+                    this.list.some((item, i) => {
+                        if (item.id == id) {
+                            this.list.splice(i, 1);//(i,1)  i:要删除的数组中的索引  1:删除元素的个数
+                        }
+                    });
+                },
+
+                //搜索
+                search: function (keywords) {
+                    var newArray = [];
+                    //1.判断一个字符串中是否包含另一个字符串  Arry.indexOf()  返回 1:存在   -1:不存在
+                    this.list.forEach(item => {
+                        if (item.name.indexOf(keywords) != -1) {
+                            newArray.push(item);
+                        }
+
+                    });
+                    return newArray;
                 }
             },
-            'fontsize':function(el,binding){
-                    el.style.fontSize =parseInt(binding.value)+'px';
+            //私有过滤器
+            filters: {
+                privateTimeFilter: function (createtimeStr, args) {
+                    let datetime = DateTimeNow(createtimeStr);
+                    return datetime + '~~~~~~~~~~~~~~~'
+                }
+            },
+            //私有指令
+            directives: {
+                'fontweight': {
+                    bind: function (el, binding) {
+                        debugger
+                        el.style.fontWeight = binding.value;
+                    }
+                },
+                'fontsize': function (el, binding) {
+                    el.style.fontSize = parseInt(binding.value) + 'px';
+                }
+
+
             }
-            
-
-        }
 
 
 
 
 
 
-    });
-    
+        });
+
     </script>
 
 
 
 
-    
+
 </body>
+
 </html>
-
-
-
-
-
-
-

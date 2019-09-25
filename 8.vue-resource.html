@@ -16,16 +16,25 @@
     </div>
 
     <script>
+        //全局配置信息
+        //1.配置全局根地址：
+        Vue.http.options.root='http://localhost:8089/';
+        //2.配置post 提交方式 emulateJSON = true
+        Vue.http.emulateJSON = true;
+
+
+
         var vm = new Vue({
             el:"#app",
             data:{
             },
             methods:{
                 GetInfo(){
+                    let url = 'api/Test/GetData';
                     //let url = 'https://localhost:5001/api/Test/GetData';
-                    let url = 'https://www.baidu.com/';
                     this.$http.get(url).then(res=>{
-                        console.info("GET请求:"+res.body);
+                        
+                       alert("GET请求:"+JSON.stringify(res.body));
                     },
                     (err)=>{
                         debugger
@@ -36,11 +45,16 @@
                     // 参数1： 要请求的URL地址
                     // 参数2： 要发送的数据对象
                     // 参数3： 指定post提交的编码类型为 application/x-www-form-urlencoded
-                    let url = 'https://localhost:5001/api/Test/PostData';
-                    var data = {"id":"123"}
-                    this.$http.post(url,data,{ emulateJSON: true }).then(res=>{
-                        console.info("post请求:"+res.body);
-                    })
+                    let url = 'api/Test/PostData';
+                    //let url = 'https://localhost:5001/api/Test/PostData';
+                    
+                     var inputModel = {"id":"123s"};
+                    this.$http.post(url,inputModel,{}).then(res=>{
+                        alert("post请求:"+JSON.stringify(res.body));
+                        
+                    },  (err)=>{
+                        debugger
+                    }); 
                 },
                 JosnpInfo(){ // JSONP形式从服务器获取数据
                     this.$http.jsonp('https://www.baidu.com/').then(res=>{
