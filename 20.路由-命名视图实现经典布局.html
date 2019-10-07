@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+
+
+    <style>
+        html,body,h1{
+            margin: 0;
+            padding: 0
+            
+        }
+        .headerbox{
+            background-color:chocolate;
+            height: 80px
+        }
+
+        .container{
+            display: flex;
+            height: 600px;
+        }
+
+        .leftbox{
+            background-color:crimson;
+            flex: 2
+        }
+
+        .mainbox{
+            background-color:cornflowerblue;
+            flex: 8
+        }
+    
+    
+    
+    
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <div class="container">
+                <router-view name="left"></router-view>
+                <router-view name="main"></router-view>
+        </div>
+       
+
+    </div>
+
+
+    <script>
+
+        //模板定义
+        var headerbox = {
+            template: '<h1 class="headerbox">头部区域</h1>'
+        }
+
+
+        var leftbox = {
+            template: '<h1 class="leftbox">左侧区域</h1>'
+        }
+
+
+        var mainbox = {
+            template: '<h1 class="mainbox"> 主体区域</h1>'
+        }
+
+
+        //注册路由
+        const router = new VueRouter({
+            routes: [
+                // {path:'/',component:headerbox},
+                // {path:'/left',component:leftbox},
+                // {path:'/main',component:mainbox}
+
+
+
+                {
+                    path: '/', components: {
+                        'default': headerbox,
+                        'left': leftbox,
+                        'main': mainbox
+
+                    }
+                }
+            ]
+
+
+        })
+
+
+        //vue实例
+        var vm = new Vue({
+            el: '#app',
+            data:{},
+            methods: {
+                
+            },
+            router:router
+
+
+
+
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

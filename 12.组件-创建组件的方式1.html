@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+
+        <my-com1></my-com1>
+
+        <mylogin></mylogin>
+        <mylogin3></mylogin3>
+
+        <login4></login4>
+    </div>
+
+    <script>
+
+
+
+        //1.1 使用Vue.extend 来创建全局的Vue组件 并返回一个模板对象
+        var  customerComponent = Vue.extend({
+            template:'<h1>使用Vue.extend创建的h1 标签</h1>'
+        })
+
+        //1.2 使用Vue.component('组件名称','创建出来的组件模板对象') 来注册组件
+        Vue.component('my-com1',customerComponent)
+
+
+
+        //使用方式二：
+        var login = {template:'<h1>fdasfsdafdsafdasfdsa</h1>'};
+        Vue.component('mylogin',login);
+
+
+
+         //使用方式三：
+         var login = {template:'<h1>loginin 3</h1>'};
+
+
+         var login4 = {template:'<h1>loginin 4</h1>'};
+
+
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{},
+            components:{
+                //私有方式定义组件
+                'mylogin3':login,
+                login4
+
+            }
+            
+
+
+
+        });
+    
+    
+    </script>
+    
+</body>
+</html>

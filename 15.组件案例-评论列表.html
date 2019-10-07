@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+    <script src="./lib/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <componentsbox @func="loadComments"></componentsbox>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in list" v-bind:key="item.id">
+                <span class="badge">评论人：{{item.user}}</span>
+                {{item.content}}
+            </li>
+        </ul>
+
+    </div>
+
+
+    <!--模板定义-->
+    <template id="temp1">
+
+        <div>
+
+            <div class="form-group">
+                <label>评论人：</label>
+                <input type="text" class="form-control" v-model="user">
+            </div>
+
+            <div class="form-group">
+                <label>评论内容：</label>
+                <textarea class="form-control" v-model="content"></textarea>
+            </div>
+            <div class="form-group">
+
+                <input type="button" class="btn btn-primary" value="发表评论" @click="save">
+            </div>
+        </div>
+
+    </template>
+
+
+
+    <script>
+
+        //定义变量接收       
+        var componentsBox = {
+            template: '#temp1',
+            data() {
+                return {
+                    user: '',
+                    content: ''
+                }
+            }
+                        
+            ,
+            methods:{
+                save(){
+                    var commentsObj = {id: Math.random().toString(15).replace(".", ""),user:this.user,content:this.content};
+                    var list =  JSON.parse(localStorage.getItem('cmts')|| '[]');
+                    // list.push(commentsObj);
+                    list.unshift(commentsObj);
+                    localStorage.setItem('cmts',JSON.stringify(list));
+                    this.user=this.content='';
+
+                    //调用父组件中的定义的方法
+                    this.$emit('func');
+
+
+                }
+            }
+
+
+        }
+        var vm = new Vue({
+
+            el: '#app',
+            created() {
+                this.loadComments();
+            },
+            data: {
+                list: [
+                    { id: Math.random().toString(15).replace(".", ""), user: '李白', content: '天生我材必有用' },
+                    { id: Math.random().toString(15).replace(".", ""), user: '江小白 ', content: '劝君更应一杯酒' },
+                    { id: Math.random().toString(15).replace(".", ""), user: '小马', content: '分吹草地见牛羊的马' }
+                ]
+
+            },
+            methods: {
+                loadComments(){
+
+                    var list = localStorage.getItem('cmts'); 
+                     
+                    if( list!= null || list != '' || list != undefined )
+                    this.list = JSON.parse(localStorage.getItem('cmts')|| '[]');
+                    
+
+                }
+            },
+            components: {
+                componentsbox: componentsBox
+
+            }
+
+        });
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

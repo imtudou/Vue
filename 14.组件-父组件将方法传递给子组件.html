@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- v-on:func      @func       -->
+        <comp1 @func="show"></comp1>
+    </div>
+
+     <!-- 组件模板定义 -->
+    <template id="temp1">
+        <div>
+            <h1>这是子组件</h1>
+            <input type="button"  value="点击子组件按钮触发方法" @click="sonShow">
+        </div>
+
+    </template>
+
+
+
+
+
+    <script>
+
+        //定义了一个字面量类型的 组件模板对象
+        var comp1 = {
+            template:'#temp1',
+            data(){
+                return  {
+                    sondata:{'name':'张三','age':23}
+                }
+            },
+            methods:{
+                sonShow(){
+                    //通过 this.$emit（触发）  拿到并调用父组件传递过来的方法
+                    this.$emit('func',123,456,this.sondata);
+
+                }
+            }
+        }
+
+
+
+
+
+        var vm =new Vue({
+            el:'#app',
+            data:{
+                datamsgFormSon:null,
+            },
+            methods:{
+                show(data1,data2,data3/*对象 obj*/){
+                    this.datamsgFormSon = data3;
+                    console.log('调用了父组件身上定义的 shwo()方法--------data:'+data1+data2);
+                    console.log('调用了父组件身上定义的 shwo()方法--------data3:'+JSON.stringify(data3));
+                    console.log('调用了父组件身上定义的 shwo()方法--------datamsgFormSon:'+JSON.stringify(this.datamsgFormSon));
+
+                }
+            },
+            components:{
+                comp1:comp1
+            }
+
+
+
+        })
+    
+    
+    </script>
+    
+</body>
+</html>

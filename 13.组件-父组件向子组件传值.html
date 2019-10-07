@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"> </script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 父组件可以在引用子组件的时候通过 属性绑定（v-bind :） 的形式
+        把需要传递给子组件的数据 以属性绑定的形式 传递到子组件的内部 供子组件使用
+        -->
+        <com1  v-bind:parentmsg="msg"></com1>
+    </div>
+
+
+    <div id="app1">
+        <son v-bind:sonmsg="msg"></son>
+    </div>
+
+
+    <div id="app2">
+        <comp2 v-bind:sonmsg2="msg2"></comp2>
+    </div>
+
+
+
+
+    <script>
+        var vu = new Vue({
+            el:'#app',
+            data:{
+                msg:"父组件中的是msg消息",
+            },         
+            components:{
+                com1:{
+                    template:'<h1   @click="change">这是一个子组件------{{parentmsg}}</h1>',
+
+                    //注意：组件中的所有  props中的数据都是通过父组件出传递给子组件的
+                    //props:中的的数据都是只读的 
+                    props:['parentmsg'],//把父组件传递过来的parentmsg属性 先在props 数组中定义下  这样才能使用这个数据
+                    data(){
+                        //注意：子组件中的data 数据并不是通过父组件传递过来的 而子组件自身私有的， 比如子组件通过 ajax请求得到的数据并放到data身上
+                        //data 身上的数据都是可读可写的
+                        return  {
+                            title:'1234',
+                            content:'cesces'
+
+                        }
+                    },
+                    methods:{
+                        change(){
+                            this.parentMsg += "被修改了  ！！！！";
+                        }
+                    },
+
+                }
+
+            }
+
+
+
+
+
+        })
+
+
+        var vm = new Vue({
+            el:'#app1',
+            data:{
+                msg:'这是父组件中的消息',
+            },
+            components:{
+                son:{
+                    template:'<h1>这是子组件--------{{sonmsg}}</h1>',
+                    props:['sonmsg']
+                }
+            }
+
+
+        })
+        
+        var vm2 = new Vue({
+
+            el:'#app2',
+            data:{
+                msg2:'这是父组件中的msg消息',
+            },
+            components:{
+                comp2:{
+                    template:'<h1>这是一个子组件--------{{sonmsg2}}</h1>',
+                    props:['sonmsg2']
+                }
+
+
+            }
+        })
+    
+    
+    </script>
+    
+</body>
+</html>

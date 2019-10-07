@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"> </script>
+
+    <style>
+        li {
+            border: 1px dashed black;
+            line-height: 60px;
+            width: 100%;
+
+
+        }
+
+        li:hover {
+            background-color: pink;
+            transition: all 0.8s ease;
+        }
+
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active,
+        .vv-leave-active {
+            transition: all 1s ease;
+        }
+
+        /*
+        删除时动画
+        */
+        .v-move {
+            transition: all 1s ease;
+
+        }
+
+        .vv-leave-active {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <label>ID：</label>
+        <input type="text" v-model="id" />
+        <label>NAME：</label>
+        <input type="text" v-model="name" />
+        <button @click="add">添加</button>
+        <!-- <ul> -->
+        <!-- <li v-for="item in list" :key="item.id">
+                {{item.id}}-------{{item.name}}
+            </li> -->
+
+        <!--在实现列表过度的时候，如果需要过度元素，是通过v-for循环渲染出来的不能
+            使用transition包裹，需要使用transitiongroup
+        
+            给 transition-group 添加 appear 实现页面刚初始化的效果
+            给 transition-group 设置tag 属性 使其渲染成ul 元素 默认为 sapn 标签
+           -->
+
+        <transition-group appear tag="ul">
+            <li v-for="(item,index) in list" :key="item.id" @click=del(index)>
+                {{item.id}}-------{{item.name}}
+            </li>
+        </transition-group>
+
+
+
+        <!-- </ul> -->
+    </div>
+
+    <script>
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: '',
+                name: '',
+                list: [
+                    { id: 1, name: '张三1' },
+                    { id: 2, name: '张三2' },
+                    { id: 3, name: '张三3' },
+                    { id: 4, name: '张三4' },
+                    { id: 5, name: '张三5' }
+                ]
+
+            },
+            methods: {
+                add() {
+                    this.list.push({ id: this.id, name: this.name });
+                },
+
+                del(i) {
+                    this.list.splice(i, 1);
+                }
+
+
+            }
+
+
+
+        });
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
