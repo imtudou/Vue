@@ -1,0 +1,13 @@
+webpack 4.x 命令
+
+
+
+npm init -y 初始化项目结构
+npm i jquery -s --安装 jquery
+npm i webpack -D 本地安装webpack
+npm i -D webpack-cli 地安装 webpack-cli
+
+1.使用 webpack-dev-server 工具实现自动打包编译的功能
+安装本地开发依赖
+
+cnpm i webpack-dev-server -D 
