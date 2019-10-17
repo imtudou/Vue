@@ -26,7 +26,8 @@ module.exports = {
             // {test:/\.(jpg|png|gif|bmp|jpeg)$/,loader:"url-loader?limit=119319&name=[name].[ext]"}
             {test:/\.(jpg|png|gif|bmp|jpeg)$/,use:'url-loader?limit=119319&name[hash:8]=[name].[ext]'},
             // {test:/\.js$/,use:'babel-loader',exclude:/node_modules/}//配置babel转换高级的es语法
-            {test:/\.vue$/,use:'vue-loader'}//配置.vue组件的loader
+            {test:/\.vue$/,use:'vue-loader'},//配置.vue组件的loader
+			{test: /\.(ttf|eot|svg|woff|woff2)$/, use: 'url-loader' } // 处理 字体文件的 loader 
         ]
 
 

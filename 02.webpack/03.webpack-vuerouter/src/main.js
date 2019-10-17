@@ -7,14 +7,14 @@ Vue.use(VueRouter)
 
 //导入mint-ui
 // import MintUI from 'mint-ui';
-// import 'mint-ui/lib/style.css'
+import 'mint-ui/lib/style.css'
 // Vue.use(MintUI)
-// import { Button } from 'mint-ui';
-// Vue.component(Button.name, Button);
-
-//按照需要导入mint-ui
 import { Button } from 'mint-ui';
 Vue.component(Button.name, Button);
+
+//按照需要导入mint-ui
+// import { Button } from 'mint-ui';
+// Vue.component(Button.name, Button);
 
 
 

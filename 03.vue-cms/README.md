@@ -1,22 +1,24 @@
 webpack基本使用：
 
 
-1.使用npm包管理  
+# 1.使用npm包管理  
  npm init -y
  --如果是中文 直接 npm init 项目名称
 
 
- 2.全局打包（不好用）
+# 2.全局打包（不好用）
  webpack .\src\main.js .\dit\bundle.js
  --webpack ./src/main.js -o ./dist/bundle.js --mode development
 
- 3.自动打包
- 3.1  cnpm i webpack -D   cnpm i -D webpack-cli
- 3.2  cnpm i webpack-dev-server -D
- 3.3  项目根目录新增 webpack.config.js 配置文件文件 
-  
- 3.4  在配置文件里做相应配置代码如下：
-        
+# 3.自动打包
+ ## 3.1  安装webpack-dev-server
+ ```js
+    cnpm i webpack -D   cnpm i -D webpack-cli
+    cnpm i webpack-dev-server -D
+ ```
+ ## 3.2  项目根目录新增 webpack.config.js 配置文件文件 
+ 在配置文件里做相应配置代码如下：
+ ``` js    
       //导入path 模块
       const path = require('path');
       module.export={
@@ -26,15 +28,15 @@ webpack基本使用：
         filename:'bundle.js';//指定输出文件名称
         }
       }
+```
+## 3.3 配置实时构建
+在 package.json 文件找到 script 节点中添加脚本： ``` "dev": "webpack-dev-server --open  --port 3000  --contentBase src  --hot",```
 
-3.4 配置实时构建
-在 package.json 文件找到 script 节点中添加脚本：  "dev": "webpack-dev-server --open  --port 3000  --contentBase src  --hot",
 
-
-4.使用html-webpack-plugin插件配置启动页面
-4.1  cnpm i html-webpack-plugin -D
-4.2  在配置文件(webpack.config.js )中做如下配置
-
+# 4.使用html-webpack-plugin插件配置启动页面
+## 4.1  cnpm i html-webpack-plugin -D
+## 4.2  在配置文件(webpack.config.js )中做如下配置
+```js
      var htmlWebpackPlugin = require('html-webpack-plugin');
 
      plugins:{
@@ -43,25 +45,29 @@ webpack基本使用：
              filename:'index.html'//指定生成内存页面名称
          })
      }
+```
 
-
-5.安装第三方loader
-5.1 安装css-loader
+# 5.安装第三方loader
+## 5.1 安装css-loader
 cnpm i style-loader -D
+```
 cnpm i css-loader -D
 --简写 cnpm i style-loader css-loader -D
-
-5.2 安装less-loader   
+```
+## 5.2 安装less-loader   
+```
 cnpm i less -D
 cnpm i less-loader -D
 --简写  cnpm i less-loader less -D
-
-5.3 安装sass-loader
+```
+## 5.3 安装sass-loader
+```
 cnpm i node-sass -D
 cnpm i sass-loader -D
 --简写 cnpm i sass-loader node-sass -D
-
-5.4 在配置文件中做相应配置如下：
+```
+## 5.4 在配置文件中做相应配置如下：
+```js
   module: {//用于配置所有地方三方模块加载器
     rules: [//所有第三方模块 匹配规则
       //错误配置     { test: /\.css$/, use: ['style-loader', 'css-loder'] }//配置处理 .css文件的第三方loader
@@ -72,8 +78,9 @@ cnpm i sass-loader -D
 
     ],
   }
-
-5.5 配置处理css文件中的 url地址，,不管是图片 字体库
+```
+## 5.5 配置处理css文件中的 url地址，,不管是图片 字体库
+```js
 cnpm i url-loader file-loader -D
 
 配置处理图片规则：
@@ -83,51 +90,63 @@ limit < 图片的大小(kb*1024=字节)  图片不会转成base64位编码。
 
 配置图片显示名称 name[hash:8]=[name].[ext]
                 [hash:8] hash值+图片默认名称
+```
+## 5.6 配置字体图标 bootstarp
 
-5.6 配置字体图标 bootstarp
-cnpm i bootstarp -S
+
+``` { test: /\.(ttf|eot|svg|woff|woff2)$/, use: 'url-loader' }, // 处理 字体文件的 loader ```
 
 
-5.7webpack 中处理es6，es7高级语法。
-5.7.1  cnpm i babel-core babel-loader babel-plugin-transform-runtime -D 
-       cnpm i babel-preset-env bable-preset-stage-0 -D
-
-在webpack.config.js添加配置项如下：  {tests:/\.js$/,use:'babel-loader',exclude:/node_modules/}  --排除//exclude:/node_modules/
+## 5.7webpack 中处理es6，es7高级语法。
+```
+cnpm i babel-core babel-loader babel-plugin-transform-runtime -D 
+cnpm i babel-preset-env bable-preset-stage-0 -D
+```
+```js
+在webpack.config.js添加配置项如下：  
+{tests:/\.js$/,use:'babel-loader',exclude:/node_modules/}  --排除//exclude:/node_modules/
 在根目录添加 .bablerc 配置文件（json格式）配置项如下:
 {
   "presets":["env","stage-0"],//语法映射
   "plugins":["transform-runtime"]//插件
 }
+```
 
-
-6.webpack 项目中使用vue
+# 6.webpack 项目中使用vue
+```js
 cnpm i  vue -S 
 注意:此处安装vue后会引起 webpack-dev-server 的不兼容,此时只与需要将
      node_modules文件全部删除后 执行npm install后即可
+```
+## 6.1 安装 打包 .vue 文件的 loader
+``` cnpm i vue-loader vue-template-compiler -D ```
 
-6.1 安装 打包 .vue 文件的 loader
-cnpm i vue-loader vue-template-compiler -D
+## 6.2 在配置文件中module节点新增配置项如下：
+``` {test:/\.vue$/,use:'vue-loader'} ```
 
-6.2 在配置文件中module节点新增配置项如下：
-{test:/\.vue$/,use:'vue-loader'}
+## 6.3 使用vue-loader需要在配置文件中插件配置接点新增配置
+导入插件：
+```js
+ const vueLoaderPlugin = require('vue-loader/lib/plugin')
+ new vueLoaderPlugin()
+```
 
-6.3 使用vue-loader需要在配置文件中插件配置接点新增配置
-导入插件： const vueLoaderPlugin = require('vue-loader/lib/plugin')
-          new vueLoaderPlugin()
 
-
-
-7.安装 vue-router
+# 7.安装 vue-router
+```
 npm install vue-router -S
+```
 
 
 
 
 
-
-执行如下命令运行项目
+# 执行如下命令运行项目
+```
 npm install
 npm run dev  
+```
+
 
 
 
