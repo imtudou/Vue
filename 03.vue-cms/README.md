@@ -137,6 +137,11 @@ cnpm i  vue -S
 npm install vue-router -S
 ```
 
+# 8. 安装 vue-resource
+```js
+cnpm i vue-resource -S
+```
+
 
 
 
