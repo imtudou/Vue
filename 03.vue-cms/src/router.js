@@ -6,6 +6,7 @@ import home from './components/tabbar/HomeContainer.vue'
 import member from './components/tabbar/MemberContainer.vue'
 import shopingcar from './components/tabbar/ShopingcarContainer.vue'
 import search from './components/tabbar/SearchContainer.vue'
+import newslist from "./components/news/NewsList.vue";
 
 
 
@@ -17,7 +18,8 @@ var router = new VueRouter({
         { path: '/home', component: home },
         { path: '/member', component: member },
         { path: '/shopingcar', component: shopingcar },
-        { path: '/search', component: search }
+        { path: '/search', component: search },
+        {path:'/home/newslist',component:newslist}
     ],
     linkActiveClass: 'mui-active'//覆盖路由默认高亮的类rotuer-link-active
 })

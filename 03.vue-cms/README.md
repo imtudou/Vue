@@ -142,6 +142,25 @@ npm install vue-router -S
 cnpm i vue-resource -S
 ```
 
+# 9.定义全局过滤器,使用 moment时间插件 格式时间
+```js
+//安装插件命令：
+cnpm i moment -S
+//导入插件
+improt moment from 'moment';
+//定义全局过滤器
+Vue.filter('dateFormat',function(dateStr,parameters = 'YYYY-MM-DD HH:mm:ss'){
+  debugger
+    return moment(dateStr,parameters);
+
+});
+
+```
+调用方式 :
+```html
+<span>发表时间:{{item.CreateTime | dateFormat}}</span>
+```
+
 
 
 
