@@ -152,7 +152,6 @@ improt moment from 'moment';
 Vue.filter('dateFormat',function(dateStr,parameters = 'YYYY-MM-DD HH:mm:ss'){
   debugger
     return moment(dateStr,parameters);
-
 });
 
 ```
