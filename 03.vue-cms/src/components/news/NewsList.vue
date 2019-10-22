@@ -2,7 +2,7 @@
   <div>
     <ul class="mui-table-view">
       <li class="mui-table-view-cell mui-media" v-for="item in NewsList" :key="item.ID">
-        <a href="javascript:;">
+        <router-link :to="'/home/newsinfo?id=' + item.ID">
           <img class="mui-media-object mui-pull-left" :src="item.ImgUrl" />
           <div class="mui-media-body">
             {{item.Title}}
@@ -14,14 +14,14 @@
               <span class="custome-css-p-span">浏览:{{item.ClickNumber}} 次</span>
             </p>
           </div>
-        </a>
+        </router-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { Toast } from "mint-ui";
+import { Toast, Indicator } from "mint-ui";
 
 export default {
   data() {
@@ -31,7 +31,11 @@ export default {
     };
   },
   created() {
-    this.GetNewsList();
+    Indicator.open("加载中...");
+    setTimeout(() => {
+      this.GetNewsList();
+    }, 500);
+    
   },
   methods: {
     GetNewsList() {
@@ -40,7 +44,7 @@ export default {
       this.$http.get(url).then(result => {
         if (result.body.code == 200) {
           this.NewsList = JSON.parse(result.body.data);
-          
+          Indicator.close();
         } else {
           Toast("失败！");
         }
@@ -51,7 +55,7 @@ export default {
 </script>
 
 <style  scoped>
-.custome-css-p-span{
-    margin-left: 5%;
+.custome-css-p-span {
+  margin-left: 5%;
 }
 </style>

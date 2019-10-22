@@ -143,6 +143,7 @@ cnpm i vue-resource -S
 ```
 
 # 9.定义全局过滤器,使用 moment时间插件 格式时间
+
 ```js
 //安装插件命令：
 cnpm i moment -S

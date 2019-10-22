@@ -18,8 +18,7 @@
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
-          <span class="mui-icon mui-icon-extra mui-icon-extra-share">
-          </span>
+          <span class="mui-icon mui-icon-extra mui-icon-extra-share"></span>
           <div class="mui-media-body">图片分享</div>
         </a>
       </li>
@@ -52,12 +51,15 @@
 </template>
 
 <script>
-import { Toast } from "mint-ui";
+import { Toast, Indicator } from "mint-ui";
 
 export default {
   created() {
-    //获取轮播图信息
-    this.GetSwipe();
+    Indicator.open("加载中...");
+    setTimeout(() => {
+      //获取轮播图信息
+      this.GetSwipe();
+    }, 500);
   },
   data() {
     return {
@@ -70,6 +72,7 @@ export default {
       this.$http.get(url).then(result => {
         if (result.body.code == 200) {
           this.SwipeList = JSON.parse(result.body.data);
+          Indicator.close();
         } else {
           Toast("失败");
         }

@@ -13,11 +13,13 @@ Vue.use(VueResource)
 //引入第三方组件,样式
 //1.1 Mint-UI
 import 'mint-ui/lib/style.css';
-import { Header, Swipe, SwipeItem } from 'mint-ui';
+import { Header, Swipe, SwipeItem,Button} from 'mint-ui';
 Vue.component(Header.name, Header);
 //轮播图
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name,Button );
+
 
 //1.2 MUI
 import '../lib/mui/css/mui.min.css'
@@ -46,10 +48,8 @@ Vue.http.emulateJSON = true;
 
 
 //配置全局过滤器
-Vue.filter('dateFormat',function(dateStr,parameters = 'YYYY-MM-DD HH:mm:ss'){
-    debugger
+Vue.filter('dateFormat',function(dateStr,parameters = 'YYYY-MM-DD HH:mm:ss'){   
     return moment(dateStr,parameters);
-
 });
 
 
