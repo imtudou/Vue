@@ -8,6 +8,7 @@ import shopingcar from './components/tabbar/ShopingcarContainer.vue'
 import search from './components/tabbar/SearchContainer.vue'
 import newslist from './components/news/NewsList.vue';
 import newsinfo from './components/news/NewsInfo.vue';
+import photolist from './components/photos/PhotoList.vue';
 
 
 
@@ -22,7 +23,8 @@ var router = new VueRouter({
         { path: '/shopingcar', component: shopingcar },
         { path: '/search', component: search },
         { path:'/home/newslist',component:newslist},
-        { path:'/home/newsinfo',component:newsinfo}
+        { path:'/home/newsinfo',component:newsinfo},
+        { path:'/home/photolist',component:photolist}
     ],
     linkActiveClass: 'mui-active'//覆盖路由默认高亮的类rotuer-link-active
 })

@@ -1,3 +1,10 @@
+console.log("~~~~~~hahahahahahhaha~~~~~");
+console.log("本人的个人网站：");
+console.log("www.imtudou.cn");
+console.log("~~~~~~hahahahahahhaha~~~~~");
+
+
+
 //入口文件
 import Vue from 'vue';
 import VueRouter from 'vue-router';

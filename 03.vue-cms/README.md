@@ -161,6 +161,20 @@ Vue.filter('dateFormat',function(dateStr,parameters = 'YYYY-MM-DD HH:mm:ss'){
 <span>发表时间:{{item.CreateTime | dateFormat}}</span>
 ```
 
+# 10.在webpack打包的时移除严格模式
+1.装包
+```js
+cnpm install babel-plugin-transform-remove-strict-mode -D
+
+//在 .babelrc 中配置如下:
+"plugins": [
+      "transform-remove-strict-mode"  //配置移除严格模式
+]
+```
+ 
+
+
+
 
 
 
