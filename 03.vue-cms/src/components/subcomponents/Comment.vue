@@ -20,6 +20,7 @@
 
 <script>
 import { Toast, Indicator } from "mint-ui";
+import DateTimeNow from "../../DateTimeHelper.js";
 
 export default {
   data() {
@@ -67,19 +68,32 @@ export default {
     //发表评论
     //
     SaveComment() {
-
-      Indicator.open();
-      var commentItem = {};
-      commentItem.id = this.total++ ;
-      commentItem.content = this.contentsss;
-      commentItem.createTime = new Date().toISOString();
-      commentItem.userName = "匿名用户" + commentItem.id;
-      this.CommentList.unshift(commentItem);
-      this.contentsss == "";
-      setTimeout(() => {
-        Indicator.close();
-        Toast("保存成功！");    
-      }, 500);
+      //非空校验
+      if (this.contentsss.trim().length == 0) {
+        Toast("非法字符！");
+      } else { 
+        Indicator.open();
+        var commentModel = {};
+        commentModel.id = this.total++;
+        commentModel.content = this.contentsss;
+        commentModel.createTime = DateTimeNow();
+        commentModel.userName = "匿名用户" + commentModel.id;
+        //发起网络请求
+        let url = "api/Resources/SaveComment";
+        this.$http
+          .post(url, JSON.stringify(commentModel), {})
+          .then(result => {
+            if (result.body.code == 200) {
+              setTimeout(() => {
+                Indicator.close();
+                this.CommentList.unshift(result.body.data);
+                this.contentsss = "";
+                Toast("发表成功！");
+              }, 100);
+            }
+          })
+          .catch(err => {});
+      }
     }
   }
 };
