@@ -4,16 +4,16 @@ const vueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
 
-    entry:path.join(__dirname,'./src/main.js'),
-    output:{
-        path:path.join(__dirname,'./dist'),
-        filename:'bundle.js'
+    entry:path.join(__dirname,'./src/main.js'),//入口文件
+    output:{//指定输出项
+        path:path.join(__dirname,'./dist'),//输出路径
+        filename:'bundle.js'//指定输出文件名称
     },
     plugins:[//所有webpack插件配置接点
         new htmlWebpackPlunin({
             template:'./src/index.html',
             filename:'index.html'
-        }),
+        }), 
         new vueLoaderPlugin()
 
 

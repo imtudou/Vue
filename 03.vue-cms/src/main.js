@@ -19,13 +19,20 @@ Vue.use(VueResource)
 
 //引入第三方组件,样式
 //1.1 Mint-UI
+
 import 'mint-ui/lib/style.css';
-import { Header, Swipe, SwipeItem,Button} from 'mint-ui';
-Vue.component(Header.name, Header);
-//轮播图
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name,Button );
+import MintUI from 'mint-ui';
+Vue.use(MintUI);
+// import { Header, Swipe, SwipeItem,Button,Lazyload } from 'mint-ui';
+// Vue.component(Header.name, Header);
+// //轮播图
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Button.name,Button );
+
+//注意：此处按需导入 懒加载 效果无法出现，需改成全部导入 mint-ui
+// //懒加载
+// Vue.use(Lazyload);
 
 
 //1.2 MUI

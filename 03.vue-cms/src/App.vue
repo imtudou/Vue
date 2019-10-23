@@ -25,9 +25,9 @@
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
           <span class="mui-badge">0</span>
         </span>
-        <span class="mui-tab-label-yuanyi">购物车</span>
+        <span class="mui-tab-label">购物车</span>
       </router-link>
-      <router-link class="mui-tab-item" to="/search">
+      <router-link class="mui-tab-item-yuanyi" to="/search">
         <span class="mui-icon mui-icon-search"></span>
         <span class="mui-tab-label">搜索</span>
       </router-link>
@@ -88,6 +88,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+
+/* 解决图片分享列表层级问题 */
+.mint-header{
+  z-index: 99;
+}
+
+
 
 
 </style>

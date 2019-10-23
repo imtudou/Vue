@@ -9,6 +9,7 @@ import search from './components/tabbar/SearchContainer.vue'
 import newslist from './components/news/NewsList.vue';
 import newsinfo from './components/news/NewsInfo.vue';
 import photolist from './components/photos/PhotoList.vue';
+import photoinfo from './components/photos/PhotoInfo.vue';
 
 
 
@@ -24,10 +25,13 @@ var router = new VueRouter({
         { path: '/search', component: search },
         { path:'/home/newslist',component:newslist},
         { path:'/home/newsinfo',component:newsinfo},
-        { path:'/home/photolist',component:photolist}
+        { path:'/home/photolist',component:photolist},
+        { path:'/home/photoinfo',component:photoinfo},
     ],
     linkActiveClass: 'mui-active'//覆盖路由默认高亮的类rotuer-link-active
 })
+
+
 
 //把路由对象暴露出去
 export default router

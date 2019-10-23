@@ -1,6 +1,6 @@
 {
     "plugins": [
-         "transform-remove-strict-mode"  //配置移除严格模式
+        "transform-remove-strict-mode"  //配置移除严格模式
 
 
 
