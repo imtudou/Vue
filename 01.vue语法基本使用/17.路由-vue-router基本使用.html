@@ -20,21 +20,51 @@
 
         <!--router-link 默认渲染为 a 标签  -->
         <router-link to="/login" tag="span">登录(渲染为span标签)</router-link>
-        <router-link to="/login?id=10&name=zhss">登录</router-link>
-        <router-link to="/register">注册</router-link>
+        <hr>
+        <router-link to="/login?id=10&name=zhss">登录（query传参，会在地址栏显示类似get）</router-link>
+        <hr>
+        <router-link to="/register">注册（params传参，不会再地址栏显示，类似post）</router-link>
+        <hr>
+        <router-link :to="{name:'details',query:{ id:123,name:'张三'}}">明细列表(query传递多个参数)</router-link>
+        <hr>
+        <router-link :to="{name:'photos',params:{ id:123,name:'张三'}}">图片列表(params传递多个参数)</router-link>
+        <hr>
+        <a href="#" @click="queryclick">函数式编程query传参</a>
+        <hr>
+        <a href="#" @click="paramsclick">函数式编程params传参</a>
 
-        <router-view></router-view>
+
+
+
+        <hr>
+        <router-view  ></router-view>
+   
     </div>
 
 
     <script>
+        
         //创建组件模板对象
         var login = {
             template: '<h1>这是登录组件{{this.$route.query.id}} ------{{this.$route.query.name}}</h1>'
         }
 
         var register = {
-            template: '<h1>这是注册组件</h1>'
+            template: '<h1>这是注册组件{{this.$route.params.id}} ------{{this.$route.query.name}}</h1>'
+        }
+
+        var details = {
+            template: '<h1>这是明细组件{{this.$route.query.id}} ------{{this.$route.query.name}}</h1>'
+        }
+
+        var photos = {
+            template: '<h1>这是图片列表组件{{this.$route.params.id}} ------{{this.$route.params.name}}</h1>'
+        }
+        var queryclick = {
+            template: '<h1>函数式编程query传参组件{{this.$route.query.userId}} ------{{this.$route.query.name}}</h1>'
+        }
+        var paramsclick = {
+            template: '<h1>函数式编程params传参组件{{this.$route.params.userId}} ------{{this.$route.params.name}}</h1>'
         }
 
 
@@ -52,7 +82,11 @@
                 // component 表示匹配上地址后需要展示的组件内容  该属性值必须是一个组件模板对象 不能是组件的引用名称
                 { path: '/', redirect: '/login' },//重定向   默认展示某个组件
                 { path: '/login', component: login },
-                { path: '/register', component: register }
+                { path: '/register', name: 'register', component: register },
+                { path: '/details', name: 'details', component: details },
+                { path: '/photos', name: 'photos', component: photos },
+                { path: '/queryclick', name: 'queryclick', component: queryclick },
+                { path: '/paramsclick', name: 'paramsclick', component: paramsclick }
             ]
 
 
@@ -65,9 +99,17 @@
 
             },
             methods: {
+                queryclick(){
+                    router.push({ name: 'queryclick', query: { userId: 123,name:'李四queryclick' }})
+
+                },
+                paramsclick(){
+                    router.push({ name: 'paramsclick', params: { userId: 123,name:'李四paramsclick' }})
+                }
 
             },
             router: router  //绑定vm实例上
+   
 
 
         })
