@@ -10,6 +10,8 @@ import newslist from './components/news/NewsList.vue';
 import newsinfo from './components/news/NewsInfo.vue';
 import photolist from './components/photos/PhotoList.vue';
 import photoinfo from './components/photos/PhotoInfo.vue';
+import goodslist from './components/goods/GoodsList.vue';
+import goodsinfo from './components/goods/GoodsInfo.vue';
 
 
 
@@ -27,6 +29,8 @@ var router = new VueRouter({
         { path:'/home/newsinfo',component:newsinfo},
         { path:'/home/photolist',component:photolist},
         { path:'/home/photoinfo',component:photoinfo},
+        { path:'/home/goodslist',component:goodslist},
+        { path:'/home/goodsinfo',component:goodsinfo},
     ],
     linkActiveClass: 'mui-active'//覆盖路由默认高亮的类rotuer-link-active
 })

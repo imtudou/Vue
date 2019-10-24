@@ -175,6 +175,20 @@ cnpm install babel-plugin-transform-remove-strict-mode -D
 > [土豆部落:使用mui的tab-top-webview-main完成分类滑动栏解决方案](http://imtudou.cn/2019/08/09/%E4%B8%83-Vue-js-%E4%BD%BF%E7%94%A8mui%E7%9A%84tab-top-webview-main%E5%AE%8C%E6%88%90%E5%88%86%E7%B1%BB%E6%BB%91%E5%8A%A8%E6%A0%8F/)
  
 
+# 11.安装图片预览插件
+[Vue preview plugin](https://github.com/LS1231/vue-preview)
+
+```js
+cnpm i vue-preview -S
+```
+
+
+# 12.在 Android 手机调试网站
+在 ```package.json```中
+```"dev": "webpack-dev-server --open  --port 3000  --contentBase src  --hot --host 192.168.1.219"```
+新增 ```--host 192.168.1.219"```配置ip地址
+
+
 
 
 

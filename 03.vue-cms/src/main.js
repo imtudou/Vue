@@ -41,6 +41,9 @@ import '../lib/mui/css/icons-extra.css'
 
 //工具插件
 import moment from 'moment';
+//工具插件  图片预览
+import VuePreview from 'vue-preview';
+Vue.use(VuePreview);
 
 
 

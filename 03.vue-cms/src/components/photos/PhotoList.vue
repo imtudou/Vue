@@ -24,7 +24,7 @@
         v-for="item in PhotoList"
         :key="item.id"
         tag="li"
-        :to="'/home/photoinfo?id='+ item.id"
+        :to="'/home/photoinfo?id='+ item.id+'&clickNumber='+item.clickNumber+'&createTime='+item.createTime"
       >
         <img v-lazy="item.imgUrl" />
         <div class="info">
