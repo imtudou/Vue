@@ -1,6 +1,12 @@
 <template>
   <div class="goods-container">
-    <router-link :to="'/home/goodsinfo?id='+item.id"  tag="div" class="goods-item" v-for="item in GoodsList" :key="item.id">
+    <router-link
+      :to="'/home/goodsinfo?id='+item.id"
+      tag="div"
+      class="goods-item"
+      v-for="item in GoodsList"
+      :key="item.id"
+    >
       <div class="img">
         <img :src="item.imgUrl" />
       </div>
@@ -18,6 +24,8 @@
         </p>
       </div>
     </router-link>
+
+    <mt-button type="danger" size="large" @click="LoadMore">加载更多</mt-button>
   </div>
 </template>
 
@@ -30,7 +38,8 @@ import { setTimeout } from "timers";
 export default {
   data() {
     return {
-      GoodsList: []
+      GoodsList: [],
+      pageIndex: 0
     };
   },
   created() {
@@ -40,17 +49,29 @@ export default {
     }, 500);
   },
   methods: {
+    //商品列表数据源
     GetGoodsList() {
-      let url = "api/Resources/GetGoodsList";
+      let url = "api/Resources/GetGoodsList?pageIndex=" + this.pageIndex;
       this.$http
         .get(url)
         .then(result => {
           if (result.body.code == 200) {
-            this.GoodsList = result.body.data;
+            if (result.body.data.length > 0)
+              this.GoodsList = this.GoodsList.concat(result.body.data);
+            else Toast("当前已经是最后一页了！");
+
             Indicator.close();
           }
         })
         .catch(err => {});
+    },
+    //加载跟多
+    LoadMore() {
+      this.pageIndex++;
+      Indicator.open("加载中...");
+      setTimeout(() => {
+        this.GetGoodsList();
+      }, 1000);
     }
   }
 };

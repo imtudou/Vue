@@ -3,8 +3,11 @@
 
 <template>
   <div class="app_container">
+
     <!--顶部区域-->
-    <mt-header fixed title="vue项目"></mt-header>
+    <mt-header fixed title="vue项目">    
+   fa
+    </mt-header>
 
     <!--中间区域-->
     <transition>

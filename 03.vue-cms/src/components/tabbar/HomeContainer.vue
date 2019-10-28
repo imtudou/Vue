@@ -2,11 +2,8 @@
 <template>
   <div>
     <!--轮播-->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in SwipeList" :key="item.ID">
-        <img :src="item.Url" />
-      </mt-swipe-item>
-    </mt-swipe>
+    <swipe :SwipeList="SwipeList"></swipe>
+
 
     <!--九宫格-->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -52,6 +49,7 @@
 
 <script>
 import { Toast, Indicator } from "mint-ui";
+import swipe from '../subcomponents/Swipe.vue';
 
 export default {
   created() {
@@ -78,14 +76,14 @@ export default {
         }
       });
     }
+  },
+  components:{
+    swipe
   }
 };
 </script>
 
 <style  scoped>
-.mint-swipe {
-  height: 260px;
-}
 
 .mint-swipe-item:nth-child(1) {
   background-color: red;
@@ -96,10 +94,10 @@ export default {
 .mint-swipe-item:nth-child(3) {
   background-color: cyan;
 }
-img {
+/* img {
   width: 100%;
   height: 100%;
-}
+} */
 
 .mui-grid-view.mui-grid-9 {
   background-color: white;

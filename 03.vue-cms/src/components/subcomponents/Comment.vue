@@ -20,7 +20,7 @@
 
 <script>
 import { Toast, Indicator } from "mint-ui";
-import DateTimeNow from "../../DateTimeHelper.js";
+import DateTime from '../../Helper/DateTimeHelper.js';
 
 export default {
   data() {
@@ -76,7 +76,7 @@ export default {
         var commentModel = {};
         commentModel.id = this.total++;
         commentModel.content = this.contentsss;
-        commentModel.createTime = DateTimeNow();
+        commentModel.createTime = DateTime.Now();
         commentModel.userName = "匿名用户" + commentModel.id;
         //发起网络请求
         let url = "api/Resources/SaveComment";

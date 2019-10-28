@@ -1,7 +1,12 @@
 console.log("~~~~~~hahahahahahhaha~~~~~");
-console.log("本人的个人网站：");
+console.log("无敌小土豆:");
+import DateTime from './Helper/DateTimeHelper.js';
+console.log(DateTime.Now());
+
 console.log("www.imtudou.cn");
 console.log("~~~~~~hahahahahahhaha~~~~~");
+
+
 
 
 
