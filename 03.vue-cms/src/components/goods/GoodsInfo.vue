@@ -17,9 +17,9 @@
             </span>
             <span>销售价：2199元</span>
           </p>
-          <p>购买数量：
-              <numberbox></numberbox>
-
+          <p>
+            购买数量：
+            <numberbox></numberbox>
           </p>
           <p>
             <mt-button type="primary" size="small">立即购买</mt-button>
@@ -40,8 +40,8 @@
         </div>
       </div>
       <div class="mui-card-footer">
-        <mt-button type="primary" size="large" plain>图文介绍</mt-button>
-        <mt-button type="danger" size="large" plain>商品评论</mt-button>
+        <mt-button @click="GoGoodInfoDesc(id)" type="primary" size="large" plain>图文介绍</mt-button>
+        <mt-button @click="GoGoodsInfoComment(id)" type="danger" size="large" plain>商品评论</mt-button>
       </div>
     </div>
   </div>
@@ -52,13 +52,13 @@
 <script>
 import { Toast, Indicator } from "mint-ui";
 import swipe from "../../components/subcomponents/Swipe.vue";
-import numberbox from '../../components/subcomponents/GoodsInfo_numberbox.vue';
+import numberbox from "../../components/subcomponents/GoodsInfo_numberbox.vue";
 
 export default {
   data() {
     return {
       id: this.$route.query.id,
-      numbox:1,
+      numbox: 1,
       SwipeList: []
     };
   },
@@ -79,6 +79,18 @@ export default {
         } else {
           Toast("失败");
         }
+      });
+    },
+    GoGoodInfoDesc(id) {
+      this.$router.push({
+        name: 'goodsinfodesc',
+        params: { detailid:id }
+      });
+    },
+    GoGoodsInfoComment(id) {
+      this.$router.push({
+        name: 'goodsinfocomment',
+        params: { id }
       });
     }
   },

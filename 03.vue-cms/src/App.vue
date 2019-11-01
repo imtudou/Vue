@@ -3,10 +3,11 @@
 
 <template>
   <div class="app_container">
-
     <!--顶部区域-->
-    <mt-header fixed title="vue项目">    
-   fa
+    <mt-header fixed title="vue项目">
+      <div slot="left">
+        <mt-button @click="GoBack" icon="back" v-show="flag">返回</mt-button>
+      </div>
     </mt-header>
 
     <!--中间区域-->
@@ -61,50 +62,66 @@
   transition: all 0.5s ease;
 }
 
-
-
 /* 以下类名是为了解决 tabber  点击无法切换的问题 */
 .mui-bar-tab .mui-tab-item-yuanyi.mui-active {
-    color: #007aff;
+  color: #007aff;
 }
 .mui-bar-tab .mui-tab-item-yuanyi {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #929292;
+  display: table-cell;
+  overflow: hidden;
+  width: 1%;
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #929292;
 }
 .mui-bar-tab .mui-tab-item-yuanyi .mui-icon {
-    top: 3px;
-    width: 24px;
-    height: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
+  top: 3px;
+  width: 24px;
+  height: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
-.mui-bar-tab .mui-tab-item-yuanyi .mui-icon~.mui-tab-label {
-    font-size: 11px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.mui-bar-tab .mui-tab-item-yuanyi .mui-icon ~ .mui-tab-label {
+  font-size: 11px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-
 
 /* 解决图片分享列表层级问题 */
-.mint-header{
+.mint-header {
   z-index: 99;
 }
-
-
-
-
 </style>
 
 
  
 <script>
+export default {
+  data() {
+    return {
+      flag: false
+    };
+  },
+  created() {
+    this.flag == this.$route.path == '/home'?false:true;
+  },
+  methods: {
+    GoBack() {
+      this.$router.go(-1);
+    }
+  },
+  watch: {
+    "$route.path": function(newval) {
+      
+      if (newval == "/home") this.flag = false;
+      else this.flag = true;
+    }
+  }
+};
+</script>>
+
 </script>

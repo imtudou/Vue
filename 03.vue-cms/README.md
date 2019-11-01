@@ -188,6 +188,14 @@ cnpm i vue-preview -S
 ```"dev": "webpack-dev-server --open  --port 3000  --contentBase src  --hot --host 192.168.1.219"```
 新增 ```--host 192.168.1.219"```配置ip地址
 
+# 13.Vue Router(编程式的导航)
+[https://router.vuejs.org/zh/guide/essentials/navigation.html](https://router.vuejs.org/zh/guide/essentials/navigation.html)
+
+
+# 14.vue-router路由中 this.$router 与this.$route区别
+1. this.$router 实际上 就是全局 路由对象  任何页面 都可以 调用 push(), go()等方法
+2. this.$route  表示当前正在用于跳转的路由器对象，可以调用其name、path、query、params等属性
+
 
 
 

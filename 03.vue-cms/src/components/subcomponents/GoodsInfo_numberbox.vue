@@ -7,12 +7,18 @@
 </template>
 
 <script>
+
+import mui from "../../../lib/mui/js/mui.min.js";
 export default {
     
     data(){
         return{
 
         }
+    },
+    mounted(){
+      //初始化数字选择框
+      mui('.mui-numbox').numbox();
     }
 }
 </script>
