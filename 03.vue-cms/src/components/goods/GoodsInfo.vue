@@ -1,5 +1,10 @@
 <template>
   <div class="goodsinfo-container">
+    <!-- 小球 -->
+    <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+      <div class="ball" v-show="ballFlag" ref="ball"></div>
+    </transition>
+
     <!-- 商品轮播区域 -->
     <div class="mui-card">
       <swipe :SwipeList="SwipeList"></swipe>
@@ -19,11 +24,11 @@
           </p>
           <p>
             购买数量：
-            <numberbox></numberbox>
+            <numberbox @getnumber="getSelectedNumber" :maxcount="goodscount"></numberbox>
           </p>
           <p>
             <mt-button type="primary" size="small">立即购买</mt-button>
-            <mt-button type="danger" size="small">加入购物车</mt-button>
+            <mt-button type="danger" size="small" @click="addShoppingCar">加入购物车</mt-button>
           </p>
         </div>
       </div>
@@ -35,7 +40,7 @@
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
           <p>商品编号：6789098765</p>
-          <p>库存情况：2445</p>
+          <p>库存情况：{{this.goodscount}}</p>
           <p>上架时间：2019-10-28 17:29:34</p>
         </div>
       </div>
@@ -59,7 +64,11 @@ export default {
     return {
       id: this.$route.query.id,
       numbox: 1,
-      SwipeList: []
+      ballFlag: false, //控制小球是否显示
+      SwipeList: [],
+      num:1,
+      goodscount:123,//模拟设置库存数量
+
     };
   },
   created() {
@@ -83,16 +92,62 @@ export default {
     },
     GoGoodInfoDesc(id) {
       this.$router.push({
-        name: 'goodsinfodesc',
-        params: { detailid:id }
+        name: "goodsinfodesc",
+        params: { detailid: id }
       });
     },
     GoGoodsInfoComment(id) {
       this.$router.push({
-        name: 'goodsinfocomment',
+        name: "goodsinfocomment",
         params: { id }
       });
+    },
+    addShoppingCar() {
+      this.ballFlag = !this.ballFlag;
+    },
+
+
+    /**
+     * 涉及到小球动画相关的方法
+     */
+    beforeEnter(el) {
+      //设置小球开始动画前的起始位置
+      el.style.transform = "translate(0,0)";
+    },
+    enter(el, done) {
+      //offsetWidth 强制动画刷新  没有实际意义 （注意：不写这句话没有动画效果）
+      el.offsetWidth;
+      //enter 标识动画开始之后的样式 这里可以设置小球完成动画之后的结束状态
+
+      //获取小球位置
+      const ballPosition = this.$refs.ball.getBoundingClientRect();
+      //获取徽标位置
+      const badgePosition = document.getElementById('badgeball').getBoundingClientRect();
+      const x = badgePosition.left - ballPosition.left;
+      const y = badgePosition.top - ballPosition.top;
+      console.log('x:'+x+',y:'+y);
+      
+      
+      el.style.transform = `translate(${x}px,${y}px)`;
+
+
+
+      //这里的done 就是afterEnter这个函数
+      //el.style.transform = "all 1s ease"
+      el.style.transition = "all 1s cubic-bezier(0.68,-0.55,0.27,0.55)";
+      done();
+    },
+    afterEnter(el) {
+      this.ballFlag = !this.ballFlag;
+    },
+    //获取购买数量
+    getSelectedNumber(number){
+      this.num = number;
+      console.log('this.num:'+this.num);
     }
+
+
+
   },
   components: {
     swipe,
@@ -113,6 +168,18 @@ export default {
     button {
       margin: 15px 0;
     }
+  }
+
+  //小球
+  .ball {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    z-index: 99;
+    left: 150px;
+    top: 420px;
   }
 }
 </style>

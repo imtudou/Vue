@@ -1,7 +1,6 @@
 # vue-cms 是跟着B站上传智播客自学的一个小项目 作为一个 .NET 后端只想入坑下vue [线上地址](http://94.191.121.125:8083)
 
 
-
 webpack基本使用：
 
 # 1.使用npm包管理  
@@ -198,6 +197,9 @@ cnpm i vue-preview -S
 # 14.vue-router路由中 this.$router 与this.$route区别
 1. this.$router 实际上 就是全局 路由对象  任何页面 都可以 调用 push(), go()等方法
 2. this.$route  表示当前正在用于跳转的路由器对象，可以调用其name、path、query、params等属性
+
+
+# 15
 
 
 
