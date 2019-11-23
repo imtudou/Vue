@@ -1,5 +1,13 @@
 # vue-cms 是跟着B站上传智播客自学的一个小项目 作为一个 .NET 后端只想入坑下vue [线上地址](http://94.191.121.125:8083)
 
+# 执行如下命令运行项目
+```
+npm install
+npm run dev  
+```
+
+
+
 
 webpack基本使用：
 
@@ -199,7 +207,10 @@ cnpm i vue-preview -S
 2. this.$route  表示当前正在用于跳转的路由器对象，可以调用其name、path、query、params等属性
 
 
-# 15
+# 15 vuex使用
+1. `cnpm install vuex -S`
+2. 使用 `mutations` 来操作state中的数据
+3. 使用 `this.$store.commit("increment")` 调用mutations 中定义的方法
 
 
 
@@ -208,11 +219,6 @@ cnpm i vue-preview -S
 
 
 
-# 执行如下命令运行项目
-```
-npm install
-npm run dev  
-```
 
 
 

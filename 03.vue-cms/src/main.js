@@ -17,8 +17,74 @@ Vue.use(VueRouter);
 import router from './router.js'
 
 //vue-resource
-import VueResource from 'vue-resource'
-Vue.use(VueResource)
+import VueResource from 'vue-resource';
+Vue.use(VueResource);
+
+//Vuex
+import Vuex from 'vuex';
+Vue.use(Vuex);
+var store = new Vuex.Store({
+    state: {//this.$store.state.xxx
+        shoppingcar: JSON.parse(localStorage.getItem('shoppingcar') || '[]') //存储购物车中商品的数据
+
+    },
+    mutations: {//this.$store.mutations.xxx
+        //点击加入购物车把商品信息保存到 shoppingcar[] 中
+        addToShoopingcar(state, goodsinfo) {
+            //判断若重复添加只加对应商品数量即可
+            let flag = state.shoppingcar.some(item => {
+                if (item.id == goodsinfo.id) {
+                    item.count += parseInt(goodsinfo.count)
+                    return true;
+                }
+            })
+
+            if (!flag)
+                state.shoppingcar.push(goodsinfo);
+
+            localStorage.setItem('shoppingcar', JSON.stringify(state.shoppingcar));
+
+
+
+        },
+        //修改购物车中商品数量同步到store中
+        updateGoodsInfo(state, goodsinfo) {
+            state.shoppingcar.some(item => {
+                if (item.id == goodsinfo.id) {
+                    item.count = parseInt(goodsinfo.count);
+                    return true;
+
+                }
+            })
+
+
+            localStorage.setItem('shoppingcar', JSON.stringify(state.shoppingcar));
+
+
+
+        }
+
+    },
+    getters: {//this.$store.getters.xxx
+
+        //购物车徽标数量取值
+        getAllCount(state) {
+            let c = 0;
+            state.shoppingcar.forEach(item => {
+                c += item.count;
+            })
+            return c;
+        },
+        //获取购物车numbox 的值
+        getNumBoxValue(state) {
+            let obj = {};
+            state.shoppingcar.forEach(item => {
+                obj[item.id] = item.count
+            })
+            return obj;
+        }
+    }
+});
 
 
 
@@ -60,6 +126,7 @@ import app from './App.vue';
 
 
 
+
 //全局配置信息
 //http://94.191.121.125:8082/api/Resources/GetSwipe
 
@@ -70,19 +137,20 @@ Vue.http.emulateJSON = true;
 
 
 //配置全局过滤器
-Vue.filter('dateFormat',function(dateStr,parameters = 'YYYY-MM-DD HH:mm:ss'){   
-    return moment(dateStr,parameters);
+Vue.filter('dateFormat', function (dateStr, parameters = 'YYYY-MM-DD HH:mm:ss') {
+    return moment(dateStr, parameters);
 });
 
 
 var vm = new Vue({
     el: '#app',
-    data:{
+    data: {
 
     },
     methods: {
-        
+
     },
     render: c => c(app),
-    router: router
+    router: router,
+    store: store
 });

@@ -18,9 +18,9 @@
           <p>
             <span>
               市场价：
-              <del>2399元</del>
+              <del>{{this.oldPrice}}元</del>
             </span>
-            <span>销售价：2199元</span>
+            <span>销售价：{{this.nowPrice}}元</span>
           </p>
           <p>
             购买数量：
@@ -68,6 +68,10 @@ export default {
       SwipeList: [],
       num:1,
       goodscount:123,//模拟设置库存数量
+      nowPrice:this.$route.query.nowPrice,
+      oldPrice:this.$route.query.oldPrice,
+      imgUrl:this.$route.query.imgUrl,
+      title:this.$route.query.title,
 
     };
   },
@@ -104,6 +108,12 @@ export default {
     },
     addShoppingCar() {
       this.ballFlag = !this.ballFlag;
+      
+      //调用store中的 mutations 将商品保存到shoppingcar 中
+      var goodsinfo = {id:this.id,count:this.num,price:this.nowPrice,imgUrl:this.imgUrl,title:this.title,ischecked:true};
+      this.$store.commit("addToShoopingcar",goodsinfo);
+  
+
     },
 
 

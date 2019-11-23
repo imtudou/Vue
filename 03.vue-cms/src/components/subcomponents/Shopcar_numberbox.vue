@@ -1,7 +1,7 @@
 <template>
-  <div class="mui-numbox" data-numbox-min="1" :data-numbox-max="this.maxcount">
+  <div class="mui-numbox" data-numbox-min="1"   style="height:30px">
     <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-    <input class="mui-input-numbox" type="number" value="1"  @change="numberChange" ref="numbox"  />
+    <input class="mui-input-numbox" type="number" :value="initcount"  @change="numberChange" ref="numbox" readonly  />
     <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
   </div>
 </template>
@@ -16,18 +16,22 @@ export default {
 
         }
     },
-    props:['maxcount'],
+  
     mounted(){
+
       
       //初始化数字选择框
       mui('.mui-numbox').numbox();
-      console.log(this.maxcount)
+      // console.log(this.maxcount)
+      console.log(this.initcount)
     },
     methods: {
       numberChange(){
-        console.log(this.$refs.numbox.value);
-        //子组件向父组件传值 通过 this.$emit
-        this.$emit('getnumber',parseInt(this.$refs.numbox.value));
+        // this.goodsid
+        console.log(this.$refs.numbox.value)
+        var goodsinfo = {id:this.goodsid,count:this.$refs.numbox.value};
+        this.$store.commit("updateGoodsInfo",goodsinfo)
+ 
 
       }
       
@@ -40,5 +44,14 @@ export default {
 
     //   }
     // },
+    
+    props:["initcount","goodsid"]
 }
 </script>
+
+
+<style lang="scss" scope>
+
+
+  
+</style>

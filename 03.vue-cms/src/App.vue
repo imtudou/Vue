@@ -27,7 +27,7 @@
       </router-link>
       <router-link class="mui-tab-item-yuanyi" to="/shopingcar">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge" id="badgeball">0</span>
+          <span class="mui-badge" id="badgeball">{{this.$store.getters.getAllCount}}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
@@ -103,7 +103,8 @@
 export default {
   data() {
     return {
-      flag: false
+      flag: false,
+      
     };
   },
   created() {
@@ -112,7 +113,8 @@ export default {
   methods: {
     GoBack() {
       this.$router.go(-1);
-    }
+    },
+     
   },
   watch: {
     "$route.path": function(newval) {

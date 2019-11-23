@@ -1,7 +1,7 @@
 <template>
   <div class="goods-container">
     <router-link
-      :to="'/home/goodsinfo?id='+item.id"
+      :to="'/home/goodsinfo?id='+item.id+'&nowPrice='+item.nowPrice+'&oldPrice='+item.oldPrice+'&imgUrl='+item.imgUrl+'&title='+item.title"
       tag="div"
       class="goods-item"
       v-for="item in GoodsList"
