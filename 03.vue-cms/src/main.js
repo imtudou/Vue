@@ -56,11 +56,25 @@ var store = new Vuex.Store({
 
                 }
             })
-
-
             localStorage.setItem('shoppingcar', JSON.stringify(state.shoppingcar));
+        },
 
-
+        //删除购物车中国商品数据同步到 store中
+        RemoveFromShoppingcar(state, id) {
+            state.shoppingcar.some((item, index) => {
+                if (item.id == id) {
+                    state.shoppingcar.splice(index, 1);
+                }
+            })
+            localStorage.setItem('shoppingcar', JSON.stringify(state.shoppingcar));
+        },
+        GoodsInfoIsSelected(state,obg){
+            state.shoppingcar.some((item) => {
+                if (item.id == obg.id) {
+                    item.ischecked = obg.ischecked
+                }
+            })
+            localStorage.setItem('shoppingcar', JSON.stringify(state.shoppingcar));
 
         }
 
@@ -80,6 +94,27 @@ var store = new Vuex.Store({
             let obj = {};
             state.shoppingcar.forEach(item => {
                 obj[item.id] = item.count
+            })
+            return obj;
+        },
+        //获取商品添加都购物车后是否选中
+        getGoodsInfoSelect(state){
+            let obj = {};
+            state.shoppingcar.forEach(item=>{
+                obj[item.id] = item.ischecked;
+            })
+            return obj;
+        },
+        //结算区域计算总数和总价
+        getCountAndAmount(state){
+            let obj = {count:0,amount:0}
+            state.shoppingcar.forEach(item=>{
+                if(item.ischecked)
+                {
+                    obj.count += item.count;
+                    obj.amount += (item.price * item.count);
+
+                }
             })
             return obj;
         }
