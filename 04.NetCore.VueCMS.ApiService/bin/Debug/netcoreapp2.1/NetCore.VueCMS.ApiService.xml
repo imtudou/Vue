@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCore.VueCMS.ApiService</name>
+    </assembly>
+    <members>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.ApiResponse">
+            <summary>
+            出参Model
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.ApiResponse.Code">
+            <summary>
+            状态码，建议跟HTTP状态码一致
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.ApiResponse.Msg">
+            <summary>
+            返回的文字消息
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.ApiResponse.Data">
+            <summary>
+            返回的数据
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.ApiResponse.Total">
+            <summary>
+            返回的条数
+            </summary>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetSwipe">
+            <summary>
+            获取轮播图数据
+            </summary>
+            <remarks>
+            例子：
+            GET api/Resources/GetSwipe
+            </remarks>
+            <returns>SwipeModel</returns>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetNewsList">
+            <summary>
+            获取新闻列表
+            </summary>
+            <remarks>
+            例子：
+            GET api/Resources/GetNewsList
+            </remarks>
+            <returns>NewsListModel</returns>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetNewsInfoByID(System.String)">
+            <summary>
+            根据ID获取新闻详情
+            </summary>
+            <param name="id">新闻ID</param>
+            <remarks>
+            例子：
+            GET api/Resources/GetNewsInfoByID
+            </remarks>
+            <returns>NewsInfoModel</returns>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetComment(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取评论数据
+            </summary>
+            <param name="id">评论ID</param>
+            <param name="pageIndex">分页</param>
+            <param name="pageSize">分页</param>
+            <returns></returns>
+            <remarks>
+            例子：
+            GET api/Resources/GetNewsInfoByID
+            </remarks>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.SaveComment(NetCore.VueCMS.ApiService.Controllers.CommentModel)">
+            <summary>
+            发表评论
+            </summary>
+            <param name="model"></param>
+            <remarks>
+            例子：
+            POST  api/Resources/SaveComment
+            </remarks>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetPhotoCategory">
+            <summary>
+            获取图片类型
+            </summary>
+            <remarks>
+            例子：
+            GET  api/Resources/GetPhotoCategory
+            </remarks>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetPhotoListByCategoryID(System.String)">
+            <summary>
+            获取图片列表
+            </summary>
+            <param name="id"></param>
+            <remarks>
+            例子：
+            GET  api/Resources/GetPhotoListByCategoryID
+            </remarks>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetGoodsList(System.Int32,System.Int32)">
+            <summary>
+            商品列表
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <remarks>
+            例子：
+            GET  api/Resources/GetGoodsList
+            </remarks>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.GetGoodsInfoDesc">
+            <summary>
+            获取商品详情页面图文介绍
+            </summary>
+            <remarks>
+            例子：
+            GET  api/Resources/GetGoodsInfoDesc
+            </remarks>
+            <response code="200">返回成功的数据，json 或者 数组格式</response>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.TestHttpPut(System.String)">
+            <summary>
+            测试方法:HttpPut 请求
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+            <remarks>
+            例：
+            api/Resources/TestHttpPut
+            </remarks>
+        </member>
+        <member name="M:NetCore.VueCMS.ApiService.Controllers.ResourcesController.TestHttpDelete(System.String)">
+            <summary>
+            测试方法:HttpDelete 请求
+            </summary>
+            <param name="ID"></param>
+            <remarks>
+            例：
+            api/Resources/TestHttpPut
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.SwipeModel">
+            <summary>
+            轮播Model
+            </summary>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.NewsListModel">
+            <summary>
+            新闻列表Model
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.NewsListModel.ID">
+            <summary>
+            资讯ID
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.NewsListModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.NewsListModel.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.NewsListModel.Memo">
+            <summary>
+            摘要
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.NewsListModel.ClickNumber">
+            <summary>
+            点击次数
+            </summary>
+        </member>
+        <member name="P:NetCore.VueCMS.ApiService.Controllers.NewsListModel.ImgUrl">
+            <summary>
+            图片路径    
+            </summary>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.NewsInfoModel">
+            <summary>
+            新闻详情Model
+            </summary>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.CommentModel">
+            <summary>
+            评论Model
+            </summary>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.CategoryModel">
+            <summary>
+            图片类型Model
+            </summary>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.ImagesModel">
+            <summary>
+            图片Model
+            </summary>
+        </member>
+        <member name="T:NetCore.VueCMS.ApiService.Controllers.GoodsModel">
+            <summary>
+            商品Model
+            </summary>
+        </member>
+    </members>
+</doc>
