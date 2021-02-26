@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\sample\\个人博客\\NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj": {}
+    "D:\\projects\\sample\\个人博客\\Vue\\04.NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj": {}
   },
   "projects": {
-    "D:\\projects\\sample\\个人博客\\NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj": {
+    "D:\\projects\\sample\\个人博客\\Vue\\04.NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\sample\\个人博客\\NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj",
+        "projectUniqueName": "D:\\projects\\sample\\个人博客\\Vue\\04.NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj",
         "projectName": "NetCore.VueCMS.ApiService",
-        "projectPath": "D:\\projects\\sample\\个人博客\\NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj",
+        "projectPath": "D:\\projects\\sample\\个人博客\\Vue\\04.NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj",
         "packagesPath": "C:\\Users\\DeskTop\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\sample\\个人博客\\NetCore.VueCMS.ApiService\\obj\\",
+        "outputPath": "D:\\projects\\sample\\个人博客\\Vue\\04.NetCore.VueCMS.ApiService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DeskTop\\AppData\\Roaming\\NuGet\\NuGet.Config",

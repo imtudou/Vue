@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zgPYDV9DmQna8IuKuqT9+E1hn4ZhOQN7Wq5nEzVSiamNC9XQMNdc14Yhb4uBGkN4g5rzpLyxHw0rtYGJOd/Q/g==",
+  "dgSpecHash": "MMKKSjd3/+Yw3tNu+ta75dSA+Zl7GomXL9hXzPDFR8DuM01SUmTHUbydyFlZ62IzOq6THZBm33zgu6TlVkCM+w==",
   "success": true,
-  "projectFilePath": "D:\\projects\\sample\\个人博客\\NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj",
+  "projectFilePath": "D:\\projects\\sample\\个人博客\\Vue\\04.NetCore.VueCMS.ApiService\\NetCore.VueCMS.ApiService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DeskTop\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\DeskTop\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",

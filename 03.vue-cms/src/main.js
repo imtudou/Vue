@@ -166,7 +166,7 @@ import app from './App.vue';
 //http://94.191.121.125:8082/api/Resources/GetSwipe
 
 //1.配置全局根地址：
-Vue.http.options.root = 'http://94.191.121.125:8082/';
+Vue.http.options.root = 'http://47.95.243.55:8082/';
 //2.配置post 提交方式 emulateJSON = true
 Vue.http.emulateJSON = true;
 

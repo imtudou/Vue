@@ -90,7 +90,7 @@ namespace NetCore.VueCMS.ApiService
                     //许可证
                     License = new License
                     {
-                        Name = "土豆部落",
+                        Name = "无敌小土豆",
                         Url = "http://www.imtudou.cn/"
                     }
                 });
