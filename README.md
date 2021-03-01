@@ -8,7 +8,9 @@
 
 + 04.vue-cms dotnetcore 2.1 api 后台
 
-## vue-cms 是跟着B站上传智播客自学的一个小项目 作为一个 .NET 后端只想入坑下vue [线上地址](http://94.191.121.125:8083)
+## vue-cms 是跟着B站上传智播客自学的一个小项目 作为一个 .NET 后端只想入坑下vue [线上地址](http://vue.imtudou.cn)
+
+![演示图片](./05.README/3.gif)
 
 ## 执行如下命令运行项目
 ```
