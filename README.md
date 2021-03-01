@@ -18,9 +18,6 @@ npm install
 npm run dev  
 ```
 
-
-
-
 webpack基本使用：
 
 ## 1.使用npm包管理  
